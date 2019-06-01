@@ -11,12 +11,18 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
+	featured_post = Post.objects.filter(featured=True).order_by('-published')[:3]
 	posts = Post.objects.all().order_by('-published')
 	big = Post.objects.all().order_by('-published')[0]
 	welcome = Post.objects.all().order_by('-published')[:6]
 	trend =	Post.objects.all().order_by('-published')[:5]
 
-	return render(request, 'index.html', {'posts': posts, 'big': big, 'welcome': welcome, "trend": trend})
+	return render(request, 'index.html', {'posts': posts, 
+										  'big': big, 
+										  'welcome': welcome, 
+										  'trend': trend, 
+										  'featured_post': featured_post
+										  })
 
 
 @login_required

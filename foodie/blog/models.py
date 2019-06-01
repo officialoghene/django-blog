@@ -17,6 +17,7 @@ class Post(models.Model):
     body = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    featured = models.BooleanField(null=True, default=False)
 
     def __str__(self):
 
